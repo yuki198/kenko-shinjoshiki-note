@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="かつて常識とされ、いまは見直された健康の知識を「旧常識 → 現在の見解 → 出典」の形で簡潔にまとめています。症状別の定番体操も、学会・公的機関が出所のものだけ紹介します。">
+<title>健康の新常識ノート</title>
+<style>
+  :root {
+    --paper: #F9FAF8;
+    --ink: #1C2430;
+    --muted: #5C6672;
+    --accent: #2A5B9E;
+    --accent-soft: #E7EEF7;
+    --old: #8A8378;
+    --old-line: rgba(138, 131, 120, 0.55);
+    --card: #FFFFFF;
+    --border: #E3E5E1;
+    --chip-solid-ink: #FFFFFF;
+    --warn-bg: #F8EEEA;
+    --warn-accent: #A04A38;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14181E;
+      --ink: #E6E9ED;
+      --muted: #9AA4B0;
+      --accent: #7FA6E0;
+      --accent-soft: #1E2A3C;
+      --old: #9B9284;
+      --old-line: rgba(155, 146, 132, 0.6);
+      --card: #1B2027;
+      --border: #2B323C;
+      --chip-solid-ink: #12161C;
+      --warn-bg: #322220;
+      --warn-accent: #DE9C87;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #F9FAF8;
+    --ink: #1C2430;
+    --muted: #5C6672;
+    --accent: #2A5B9E;
+    --accent-soft: #E7EEF7;
+    --old: #8A8378;
+    --old-line: rgba(138, 131, 120, 0.55);
+    --card: #FFFFFF;
+    --border: #E3E5E1;
+    --chip-solid-ink: #FFFFFF;
+    --warn-bg: #F8EEEA;
+    --warn-accent: #A04A38;
+  }
+  :root[data-theme="dark"] {
+    --paper: #14181E;
+    --ink: #E6E9ED;
+    --muted: #9AA4B0;
+    --accent: #7FA6E0;
+    --accent-soft: #1E2A3C;
+    --old: #9B9284;
+    --old-line: rgba(155, 146, 132, 0.6);
+    --card: #1B2027;
+    --border: #2B323C;
+    --chip-solid-ink: #12161C;
+    --warn-bg: #322220;
+    --warn-accent: #DE9C87;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "YuGothic", "Noto Sans JP", sans-serif;
+    line-height: 1.9;
+    font-size: 16px;
+  }
+  .serif {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", serif;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ヘッダー */
+  header {
+    padding: 72px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    font-weight: 600;
+    margin: 0 0 16px;
+  }
+  h1 {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", serif;
+    font-size: clamp(30px, 6vw, 42px);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    margin: 0 0 20px;
+    text-wrap: balance;
+  }
+  .lede {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 36em;
+    margin: 0;
+  }
+
+  /* 目次 */
+  nav.toc {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  nav.toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  nav.toc h2 {
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    font-weight: 600;
+    margin: 0 0 10px;
+  }
+  nav.toc .toc-group { margin-bottom: 22px; }
+  nav.toc .toc-group:last-child { margin-bottom: 0; }
+  nav.toc a {
+    color: var(--ink);
+    text-decoration: none;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    font-size: 15px;
+  }
+  nav.toc a:hover .toc-title { color: var(--accent); text-decoration: underline; }
+  nav.toc a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  .toc-cat {
+    flex-shrink: 0;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 1px 10px;
+  }
+
+  /* 項目カード */
+  main { padding: 16px 0 40px; }
+  article {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 36px 32px 28px;
+    margin: 40px 0;
+  }
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .chip {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    border-radius: 999px;
+    padding: 2px 12px;
+    font-weight: 600;
+  }
+  .chip-cat {
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .chip-evidence { color: var(--chip-solid-ink); }
+  .ev-official   { background: var(--accent); }
+  .ev-expert     { background: color-mix(in srgb, var(--accent) 70%, var(--muted)); }
+  .ev-open       { background: var(--muted); }
+
+  .claim-old, .claim-new {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+    align-items: baseline;
+  }
+  .tag {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    padding-top: 2px;
+  }
+  .claim-old .tag { color: var(--old); }
+  .claim-new .tag { color: var(--accent); }
+  .claim-old p {
+    margin: 0;
+    color: var(--old);
+    font-size: 16px;
+    text-decoration: line-through;
+    text-decoration-color: var(--old-line);
+    text-decoration-thickness: 1px;
+  }
+  .claim-arrow {
+    color: var(--muted);
+    margin: 10px 0 10px 3px;
+    font-size: 14px;
+  }
+  .claim-new p {
+    margin: 0;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.7;
+    text-wrap: balance;
+  }
+
+  .why {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--border);
+  }
+  .why h3, .sources h3 {
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    font-weight: 600;
+    margin: 0 0 10px;
+  }
+  .why p { margin: 0 0 12px; font-size: 15px; }
+  .why p:last-child { margin-bottom: 0; }
+  .caution {
+    background: var(--accent-soft);
+    border-radius: 4px;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  .caution strong { color: var(--accent); }
+
+  .consult {
+    margin-top: 18px;
+    background: var(--warn-bg);
+    border-radius: 4px;
+    padding: 14px 18px;
+    font-size: 14px;
+  }
+  .consult h4 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    color: var(--warn-accent);
+    font-weight: 700;
+  }
+  .consult ul { margin: 0; padding-left: 1.3em; }
+  .consult li { margin-bottom: 2px; }
+  .consult p { margin: 8px 0 0; font-size: 13px; color: var(--muted); }
+
+  /* 「迷ったらこれだけ」セクション */
+  .section-head {
+    margin: 72px 0 4px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+  .section-head h2 {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", serif;
+    font-size: clamp(24px, 4.5vw, 30px);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin: 0 0 14px;
+  }
+  .section-head p {
+    color: var(--muted);
+    font-size: 15px;
+    margin: 0;
+    max-width: 38em;
+  }
+  .exercise-name {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", serif;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.6;
+    margin: 0 0 4px;
+  }
+  .exercise-origin {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0 0 18px;
+  }
+  .howto { margin: 0 0 4px; padding-left: 1.3em; }
+  .howto li { font-size: 15px; margin-bottom: 6px; }
+  .howto-note { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
+
+  .sources { margin-top: 22px; }
+  .sources ul { margin: 0; padding-left: 1.3em; }
+  .sources li { font-size: 14px; margin-bottom: 6px; }
+  .sources a { color: var(--accent); text-underline-offset: 3px; }
+  .sources a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .checked {
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* フッター・免責 */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 36px 0 64px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  footer h2 {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    color: var(--ink);
+    margin: 0 0 10px;
+  }
+  footer p { margin: 0 0 10px; max-width: 42em; }
+
+  @media (max-width: 520px) {
+    article { padding: 28px 20px 22px; }
+    .claim-new p { font-size: 18px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">生活習慣の通説、いまの答え</p>
+    <h1>健康の新常識ノート</h1>
+    <p class="lede">かつて常識とされ、いまは見直された健康の知識を「旧常識 → 現在の見解 → 出典」の形で1項目2分以内にまとめています。あわせて、種類が多すぎて選べない症状別の体操を「学会・公的機関の定番ひとつだけ」に絞って紹介します。出典のない項目は載せません。診断や治療が必要な病気・症状は扱いません。</p>
+  </div>
+</header>
+
+<nav class="toc" aria-label="目次">
+  <div class="wrap">
+    <div class="toc-group">
+      <h2>常識アップデート</h2>
+      <ol>
+        <li><a href="#sleep90"><span class="toc-cat">睡眠</span><span class="toc-title">睡眠時間は90分の倍数にすべき？</span></a></li>
+        <li><a href="#eggs"><span class="toc-cat">食事</span><span class="toc-title">卵は1日1個まで？</span></a></li>
+        <li><a href="#breakfast"><span class="toc-cat">食事</span><span class="toc-title">朝食を食べれば痩せる？</span></a></li>
+        <li><a href="#backrest"><span class="toc-cat">からだの痛み</span><span class="toc-title">腰痛のときは安静が一番？</span></a></li>
+        <li><a href="#allergy"><span class="toc-cat">子どもの健康</span><span class="toc-title">アレルギーが心配な食材は遅らせる？</span></a></li>
+      </ol>
+    </div>
+    <div class="toc-group">
+      <h2>迷ったらこれだけ — 症状別の定番体操</h2>
+      <ol>
+        <li><a href="#ex-shoulder"><span class="toc-cat">肩こり</span><span class="toc-title">肩の体操療法（日本整形外科学会）</span></a></li>
+        <li><a href="#ex-back"><span class="toc-cat">腰痛予防</span><span class="toc-title">これだけ体操</span></a></li>
+        <li><a href="#ex-knee"><span class="toc-cat">膝</span><span class="toc-title">ロコトレ（片脚立ち＋スクワット）</span></a></li>
+      </ol>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+
+    <article id="sleep90">
+      <div class="meta-row">
+        <span class="chip chip-cat">睡眠</span>
+        <span class="chip chip-evidence ev-expert">専門機関の見解</span>
+      </div>
+      <div class="claim-old">
+        <span class="tag">旧常識</span>
+        <p>睡眠は90分周期だから、睡眠時間は6時間・7時間半など90分の倍数にすると目覚めが良い。</p>
+      </div>
+      <div class="claim-arrow" aria-hidden="true">↓</div>
+      <div class="claim-new">
+        <span class="tag">現在</span>
+        <p>睡眠周期は約90〜120分と個人差が大きく、同じ人でも一晩の中で変わる。90分の倍数にこだわる根拠は薄い。</p>
+      </div>
+      <div class="why">
+        <h3>なぜ変わったか</h3>
+        <p>「90分」は多くの人の平均に近い目安にすぎません。厚生労働省の健康情報サイト（旧e-ヘルスネット）は、ノンレム-レム睡眠の周期を「90〜120分」と幅を持たせて説明しています。さらに睡眠医学の解説では、周期は人によって異なるうえ、同じ人でも睡眠不足や飲酒などの影響で変動するため「睡眠時間を90分単位にしても目覚めがいいとは言えない」と明確に述べられています。</p>
+        <p>目覚めの良さに効くのは倍数計算ではなく、自分に必要な睡眠時間を確保することと、起床時刻を一定に保つことだとされています。</p>
+      </div>
+      <div class="sources">
+        <h3>出典</h3>
+        <ul>
+          <li><a href="https://kennet.mhlw.go.jp/information/information/dictionary/heart/yk-048.html" target="_blank" rel="noopener">ノンレム睡眠（周期は90〜120分間との記載） — 健康日本21アクション支援システム・旧e-ヘルスネット（厚生労働省）</a></li>
+          <li><a href="https://www.yodosha.co.jp/rnote/sleep/q4.html" target="_blank" rel="noopener">睡眠時間を90分単位にすると目覚めがいいというのは本当ですか？ — レジデントノート（羊土社）</a></li>
+        </ul>
+      </div>
+      <p class="checked">最終確認日 2026-07-09</p>
+    </article>
+
+    <article id="eggs">
+      <div class="meta-row">
+        <span class="chip chip-cat">食事</span>
+        <span class="chip chip-evidence ev-official">公的基準に反映済み</span>
+      </div>
+      <div class="claim-old">
+        <span class="tag">旧常識</span>
+        <p>コレステロールが多いから、卵は1日1個まで。</p>
+      </div>
+      <div class="claim-arrow" aria-hidden="true">↓</div>
+      <div class="claim-new">
+        <span class="tag">現在</span>
+        <p>健康な人に対する食事由来コレステロールの摂取上限は、2015年に国の基準から撤廃された。「1日1個まで」に科学的根拠はない。</p>
+      </div>
+      <div class="why">
+        <h3>なぜ変わったか</h3>
+        <p>かつての「日本人の食事摂取基準」（2010年版まで）にはコレステロールの上限値（成人男性750mg・女性600mg／日）があり、「卵は1日1個まで」の根拠になっていました。しかし食事から摂るコレステロールが血中コレステロール値に与える影響は個人差が大きく、上限値を定めるだけの科学的根拠がないとして、2015年版で上限が撤廃されました。</p>
+        <p class="caution"><strong>ただし：</strong>「いくら食べてもよい」という意味ではありません。2020年版の基準では、脂質異常症の重症化予防の目的では1日200mg未満にとどめることが望ましいと明記されています（卵1個のコレステロールは約250mg）。健診でLDLコレステロール値を指摘されている人は別扱いです。</p>
+      </div>
+      <div class="sources">
+        <h3>出典</h3>
+        <ul>
+          <li><a href="https://www.mhlw.go.jp/content/10904750/000586553.pdf" target="_blank" rel="noopener">日本人の食事摂取基準（2020年版）策定検討会報告書 — 厚生労働省（PDF）</a></li>
+          <li><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/031200141/" target="_blank" rel="noopener">間違いだった「卵とコレステロール」の常識、本当の注意点は？ — ナショナル ジオグラフィック日本版</a></li>
+        </ul>
+      </div>
+      <p class="checked">最終確認日 2026-07-09</p>
+    </article>
+
+    <article id="breakfast">
+      <div class="meta-row">
+        <span class="chip chip-cat">食事</span>
+        <span class="chip chip-evidence ev-open">研究が続いている</span>
+      </div>
+      <div class="claim-old">
+        <span class="tag">旧常識</span>
+        <p>朝食を抜くと太る。だから痩せたければ朝食をしっかり食べるべき。</p>
+      </div>
+      <div class="claim-arrow" aria-hidden="true">↓</div>
+      <div class="claim-new">
+        <span class="tag">現在</span>
+        <p>「痩せるために朝食を食べる」は根拠が弱い。比較試験では、朝食を食べた側のほうが1日の摂取カロリーはむしろ多かった。</p>
+      </div>
+      <div class="why">
+        <h3>なぜ変わったか</h3>
+        <p>「朝食を抜く人に肥満が多い」という観察研究は昔から多数ありますが、これは生活リズムの乱れなど他の要因の影響と区別できず、因果関係の証明にはなりません。2019年にBMJ誌に載ったランダム化比較試験13件のメタ解析では、朝食を食べるよう割り付けられた群のほうが1日の摂取カロリーが平均約260kcal多く、体重もわずかに重い傾向でした。つまり「朝食を足せば痩せる」というダイエット戦略は支持されませんでした。</p>
+        <p class="caution"><strong>決着はしていません：</strong>この解析は追跡期間が短く研究の質にも限界があります。また国内のコホート研究では朝食欠食と脳卒中リスク上昇の関連が報告されており、農林水産省・厚生労働省は朝食を推奨しています。「朝食を無理に足しても痩せない」と「朝食を抜く生活が健康的」は別の話です。</p>
+      </div>
+      <div class="sources">
+        <h3>出典</h3>
+        <ul>
+          <li><a href="https://pubmed.ncbi.nlm.nih.gov/30700403/" target="_blank" rel="noopener">Sievert K, et al. Effect of breakfast on weight and energy intake. BMJ. 2019 — PubMed（英語）</a></li>
+          <li><a href="https://epi.ncc.go.jp/jphc/outcome/3768.html" target="_blank" rel="noopener">朝食の欠食と脳卒中との関連について — 国立がん研究センター 多目的コホート研究</a></li>
+          <li><a href="https://www.maff.go.jp/j/syokuiku/evidence/pdf/evidence_chosyoku2.pdf" target="_blank" rel="noopener">朝食に関するエビデンステーブル — 農林水産省（PDF）</a></li>
+        </ul>
+      </div>
+      <p class="checked">最終確認日 2026-07-09</p>
+    </article>
+
+    <article id="backrest">
+      <div class="meta-row">
+        <span class="chip chip-cat">からだの痛み</span>
+        <span class="chip chip-evidence ev-official">公的基準に反映済み</span>
+      </div>
+      <div class="claim-old">
+        <span class="tag">旧常識</span>
+        <p>腰痛になったら、安静にして寝ているのが一番の治療。</p>
+      </div>
+      <div class="claim-arrow" aria-hidden="true">↓</div>
+      <div class="claim-new">
+        <span class="tag">現在</span>
+        <p>痛みに応じてできる範囲で普段の活動を続けたほうが回復が早い。安静のしすぎは、むしろ治りを遅らせる。</p>
+      </div>
+      <div class="why">
+        <h3>なぜ変わったか</h3>
+        <p>日本整形外科学会・日本腰痛学会が監修する「腰痛診療ガイドライン2019」では、腰痛の治療として安静を保つことと活動を維持することが比較され、ぎっくり腰のような急性腰痛でも「痛みの範囲内で活動を続けるほうが有用」とされています。ベッドで寝て過ごす期間が長いほど筋力や柔軟性が落ち、痛みへの不安も強まって、回復がかえって遅れることが分かってきたためです。</p>
+        <p class="caution"><strong>ただし：</strong>これは動けないほどの激痛を我慢して動けという意味ではありません。「痛みが少し落ち着いたら、怖がらずに日常生活へ戻ってよい」という話です。</p>
+      </div>
+      <div class="consult">
+        <h4>こんな腰痛は体を動かす前に受診を</h4>
+        <ul>
+          <li>脚のしびれ・力が入らない感覚を伴う</li>
+          <li>発熱を伴う、または安静にしていても・夜間も痛む</li>
+          <li>転倒や事故など、ケガのあとに始まった</li>
+          <li>排尿・排便の異常を伴う</li>
+        </ul>
+      </div>
+      <div class="sources">
+        <h3>出典</h3>
+        <ul>
+          <li><a href="https://minds.jcqhc.or.jp/summary/c00498/" target="_blank" rel="noopener">腰痛診療ガイドライン2019 改訂第2版 — Mindsガイドラインライブラリ（日本整形外科学会・日本腰痛学会 監修）</a></li>
+          <li><a href="https://www.japanpt.or.jp/about_pt/therapy/tools/pr_magazine/egao25.html" target="_blank" rel="noopener">特集「腰痛に関する新たな常識」 — 日本理学療法士協会 広報誌</a></li>
+        </ul>
+      </div>
+      <p class="checked">最終確認日 2026-07-09</p>
+    </article>
+
+    <article id="allergy">
+      <div class="meta-row">
+        <span class="chip chip-cat">子どもの健康</span>
+        <span class="chip chip-evidence ev-official">公的基準に反映済み</span>
+      </div>
+      <div class="claim-old">
+        <span class="tag">旧常識</span>
+        <p>卵などアレルギーが心配な食材は、離乳食で与えるのをなるべく遅らせたほうが安全。</p>
+      </div>
+      <div class="claim-arrow" aria-hidden="true">↓</div>
+      <div class="claim-new">
+        <span class="tag">現在</span>
+        <p>開始を遅らせてもアレルギーは予防できない。生後5〜6か月から加熱した卵を少量ずつ始めるほうが、鶏卵アレルギーの発症リスクを下げる。</p>
+      </div>
+      <div class="why">
+        <h3>なぜ変わったか</h3>
+        <p>国立成育医療研究センターを中心とするPETIT試験（2016年）などで、離乳期の早い段階（生後4〜6か月）から加熱卵を微量ずつ摂取した子のほうが鶏卵アレルギーの発症が少ないことが示されました。これを受けて日本小児アレルギー学会は2017年に「鶏卵アレルギー発症予防に関する提言」を公表し、摂取開始を遅らせない方針が国の授乳・離乳の支援ガイドにも反映されています。</p>
+        <p class="caution"><strong>必ず守ること：</strong>与えるのは必ず十分に加熱した卵を少量から。湿疹のある赤ちゃんはまず湿疹の治療を優先し、開始前に医師に相談してください。すでに食物アレルギーと診断されている子には、この話は当てはまりません（自己判断で試さないでください）。</p>
+      </div>
+      <div class="sources">
+        <h3>出典</h3>
+        <ul>
+          <li><a href="https://www.jspaci.jp/uploads/2017/06/teigen20170616.pdf" target="_blank" rel="noopener">鶏卵アレルギー発症予防に関する提言 — 日本小児アレルギー学会（PDF）</a></li>
+          <li><a href="https://www.jspaci.jp/news/member/20171012-469/" target="_blank" rel="noopener">「鶏卵アレルギー発症予防に関する提言」の解説 — 日本小児アレルギー学会</a></li>
+        </ul>
+      </div>
+      <p class="checked">最終確認日 2026-07-09</p>
+    </article>
+
+    <section class="section-head" id="koredake">
+      <h2>迷ったらこれだけ — 症状別の定番体操</h2>
+      <p>肩こり・腰痛・膝の体操は種類が多すぎて、選べないまま結局何もしないことになりがちです。このセクションでは、学会や公的機関が出所になっている定番を症状ごとに<strong>ひとつだけ</strong>紹介します。網羅はしません。詳しいやり方は、出典の公式ページ（図解・動画あり）を見てください。</p>
+    </section>
+
+    <article id="ex-shoulder">
+      <div class="meta-row">
+        <span class="chip chip-cat">肩こり</span>
+        <span class="chip chip-evidence ev-official">学会公式</span>
+      </div>
+      <h3 class="exercise-name">肩の体操療法（肩の上げ下げ＋腕の伸び）</h3>
+      <p class="exercise-origin">日本整形外科学会のパンフレット「肩こり」に「肩の体操療法」として図解されている2つの動き</p>
+      <ol class="howto">
+        <li>両肩をすくめるように上げて、ストンと下ろす（肩の上げ下げ）</li>
+        <li>頭の上で両手を組み、腕を上へぐっと伸ばす</li>
+      </ol>
+      <p class="howto-note">同じパンフレットでは予防のポイントとして「同じ姿勢を長く続けない」「蒸しタオルなどで肩を温めて血行を良くする」「適度な運動や体操」「入浴で身体を温めてリラックス」が挙げられています。体操と温めをセットで習慣にするのが基本です。</p>
+      <div class="consult">
+        <h4>こんなときは体操ではなく受診を</h4>
+        <ul>
+          <li>手や腕のしびれを伴う</li>
+          <li>強い頭痛・めまいを伴う</li>
+          <li>セルフケアを続けても改善せず、日常生活に支障がある</li>
+        </ul>
+      </div>
+      <div class="sources">
+        <h3>出典</h3>
+        <ul>
+          <li><a href="https://www.joa.or.jp/public/sick/condition/stiffed_neck.html" target="_blank" rel="noopener">「肩こり」症状・病気をしらべる — 日本整形外科学会</a></li>
+          <li><a href="https://www.joa.or.jp/public/pdf/joa_004.pdf" target="_blank" rel="noopener">パンフレット「肩こり」（体操の図解） — 日本整形外科学会（PDF）</a></li>
+        </ul>
+      </div>
+      <p class="checked">最終確認日 2026-07-09</p>
+    </article>
+
+    <article id="ex-back">
+      <div class="meta-row">
+        <span class="chip chip-cat">腰痛予防</span>
+        <span class="chip chip-evidence ev-official">公的資料で紹介</span>
+      </div>
+      <h3 class="exercise-name">これだけ体操（腰を反らす3秒の体操）</h3>
+      <p class="exercise-origin">元東京大学医学部附属病院特任教授の松平浩氏（医学博士）が提唱。厚生労働省 佐賀労働局のサイトで腰痛防止リーフレットとして公開</p>
+      <ol class="howto">
+        <li>足を平行に、肩幅より少し広めに開いて立ち、顎を引く</li>
+        <li>両手をお尻の上に当て（手は地面に垂直に）、息を吐きながら骨盤を前に押し込むイメージでゆっくり反らす。膝は伸ばしたまま、つま先重心で</li>
+        <li>「イタ気持ちいい」ところで3秒キープして戻す。作業の合間などに1日1回だけでも</li>
+      </ol>
+      <p class="howto-note">前かがみ姿勢の作業で椎間板の髄核が後ろにずれるのを、反対方向に反らして戻す発想の体操です。反らしたとき、痛みがお尻から太もも以下に響く場合は中止して整形外科医に相談してください（リーフレットに明記されている中止基準です）。</p>
+      <div class="consult">
+        <h4>こんな腰痛は体操ではなく受診を</h4>
+        <ul>
+          <li>脚のしびれ・力が入らない感覚を伴う</li>
+          <li>発熱を伴う、または安静にしていても・夜間も痛む</li>
+          <li>転倒や事故などケガのあとに始まった</li>
+          <li>排尿・排便の異常を伴う</li>
+        </ul>
+      </div>
+      <div class="sources">
+        <h3>出典</h3>
+        <ul>
+          <li><a href="https://jsite.mhlw.go.jp/saga-roudoukyoku/content/contents/002502299.pdf" target="_blank" rel="noopener">「たったの3秒で腰痛をやりすごそう！これだけ体操」リーフレット — 佐賀労働局（厚生労働省）サイト掲載（PDF・図解あり）</a></li>
+          <li><a href="https://halmek.co.jp/beauty/c/healthr/2138" target="_blank" rel="noopener">腰痛を改善する3秒の簡単ストレッチ「これだけ体操」（松平浩氏監修） — ハルメク</a></li>
+        </ul>
+      </div>
+      <p class="checked">最終確認日 2026-07-09</p>
+    </article>
+
+    <article id="ex-knee">
+      <div class="meta-row">
+        <span class="chip chip-cat">膝</span>
+        <span class="chip chip-evidence ev-official">学会公式</span>
+      </div>
+      <h3 class="exercise-name">ロコトレ（片脚立ち＋スクワット）</h3>
+      <p class="exercise-origin">日本整形外科学会公式「ロコモONLINE」が推奨する2種目。膝を支える太ももの筋力とバランス力を鍛える</p>
+      <ol class="howto">
+        <li><strong>片脚立ち</strong>：転ばないよう机や椅子の背に手をついて、片脚を床から少し上げて1分。左右1分ずつ×1日3回</li>
+        <li><strong>スクワット</strong>：お尻を後ろに引くように2〜3秒かけてゆっくり膝を曲げ、ゆっくり戻す。膝がつま先より前に出ない・つま先の向きより内側に入らないように。5〜6回×1日3回</li>
+        <li>スクワットが難しければ、椅子からの立ち座りを繰り返すだけでも可</li>
+      </ol>
+      <p class="howto-note">膝の痛み（変形性膝関節症）の治療・予防では、太もも前面の筋肉（大腿四頭筋）を鍛える運動療法が診療ガイドラインでも推奨されています。痛みが強まる場合は無理をしないでください。</p>
+      <div class="consult">
+        <h4>こんな膝の痛みは体操ではなく受診を</h4>
+        <ul>
+          <li>膝が腫れている・熱をもっている</li>
+          <li>転倒やひねりなど、ケガのあとに始まった</li>
+          <li>安静にしていても・夜間も痛む</li>
+        </ul>
+      </div>
+      <div class="sources">
+        <h3>出典</h3>
+        <ul>
+          <li><a href="https://locomo-joa.jp/check/locotre" target="_blank" rel="noopener">ロコトレ — ロコモONLINE（日本整形外科学会公式）</a></li>
+          <li><a href="https://www.joa.or.jp/topics/2023/files/guideline.pdf" target="_blank" rel="noopener">変形性膝関節症診療ガイドライン2023 — 日本整形外科学会 監修（PDF）</a></li>
+        </ul>
+      </div>
+      <p class="checked">最終確認日 2026-07-09</p>
+    </article>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <h2>このサイトについて</h2>
+    <p>本サイトは、一般的な健康情報として「かつての常識」がその後の研究や公的基準でどう見直されたかを紹介するものであり、医療上の助言ではありません。個々の健康状態に関する判断は、医師などの専門家に相談してください。</p>
+    <p>掲載する項目は、公的機関・学会・査読論文など検証可能な出典があるものに限っています。各項目には内容を確認した日付を記載しています。</p>
+    <p>体操・ストレッチは無理のない範囲で行い、痛みやしびれが強まる場合はすぐに中止してください。各項目の「受診を」に当てはまる症状がある場合は、体操ではなく整形外科などの受診を優先してください。</p>
+  </div>
+</footer>
+</body>
+</html>
